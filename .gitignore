@@ -1,0 +1,13 @@
+# Bỏ qua thư mục thư viện (rất nặng, Render sẽ tự cài lại)
+node_modules/
+
+# Bỏ qua file chứa mật khẩu, mã bí mật (Quan trọng để bảo mật)
+.env
+
+# Bỏ qua các file rác của hệ điều hành
+.DS_Store
+Thumbs.db
+
+# Bỏ qua các thư mục build nếu có
+dist/
+build/
