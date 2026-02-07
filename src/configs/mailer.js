@@ -13,10 +13,12 @@ const transporter = nodemailer.createTransport({
         rejectUnauthorized: false,
         minVersion: "TLSv1.2"
     },
-    // Chốt chặn cuối cùng: Ép dùng IPv4 để hết lỗi ENETUNREACH
+    // GIẢI PHÁP QUAN TRỌNG NHẤT: Ép sử dụng IPv4 
+    // giúp sửa lỗi ENETUNREACH (Mạng không thể kết nối IPv6)
     family: 4 
 });
-/**
+
+      /**
  * Hàm gửi Email dùng chung
  * @param {string} to - Email người nhận (khách hàng)
  * @param {string} subject - Tiêu đề thư
@@ -31,12 +33,14 @@ const sendEmail = async (to, subject, htmlContent) => {
             html: htmlContent
         };
 
-        console.log(`--- Đang kết nối IPv4 tới Google để gửi thư ---`);
+        // Log để theo dõi tiến trình trên Render
+        console.log(`--- Đang thử gửi mail qua IPv4 tới: ${to} ---`);
+        
         const info = await transporter.sendMail(mailOptions);
-        console.log("✅ Email gửi thành công:", info.messageId);
+        console.log("✅ Email gửi thành công!");
         return info;
     } catch (error) {
-        console.error("❌ Lỗi chi tiết Mailer:", error.message);
+        console.error("❌ Lỗi Mailer:", error.message);
         throw error;
     }
 };
