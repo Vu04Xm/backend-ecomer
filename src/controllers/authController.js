@@ -99,6 +99,26 @@ const authController = {
             console.error("Forgot Password Error:", error);
             res.status(500).json({ success: false, message: "Lỗi gửi mail, vui lòng thử lại sau." });
         }
+    },
+    resetPassword: async (req, res) => {
+        const { token, newPassword } = req.body;
+        try {
+            const [rows] = await pool.execute(
+                'SELECT * FROM password_resets WHERE token = ? AND expires_at > NOW()',
+                [token]
+            );
+            if (rows.length === 0) return res.status(400).json({ message: "Token không hợp lệ hoặc hết hạn" });
+
+            const salt = await bcrypt.genSalt(10);
+            const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+            await pool.execute('UPDATE users SET password = ? WHERE email = ?', [hashedPassword, rows[0].email]);
+            await pool.execute('DELETE FROM password_resets WHERE email = ?', [rows[0].email]);
+
+            res.status(200).json({ success: true, message: "Mật khẩu đã được cập nhật!" });
+        } catch (error) {
+            res.status(500).json({ message: "Lỗi hệ thống" });
+        }
     }
 };
 
