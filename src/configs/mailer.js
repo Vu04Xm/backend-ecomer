@@ -3,19 +3,16 @@ require('dotenv').config();
 
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
-    port: 587,
-    secure: false, 
+    port: 465, // Chuyển sang cổng 465 (cổng bảo mật cao của Google)
+    secure: true, // Phải là true nếu dùng cổng 465
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
     },
-    tls: {
-        rejectUnauthorized: false,
-        minVersion: "TLSv1.2"
-    },
-    // GIẢI PHÁP QUAN TRỌNG NHẤT: Ép sử dụng IPv4 
-    // giúp sửa lỗi ENETUNREACH (Mạng không thể kết nối IPv6)
-    family: 4 
+    // Thêm phần này để tránh lỗi timeout khi server phản hồi chậm
+    connectionTimeout: 10000, // 10 giây
+    greetingTimeout: 10000,
+    socketTimeout: 10000
 });
 
       /**
