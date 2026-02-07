@@ -1,34 +1,38 @@
-// kết nối tập trung 
 const mysql = require('mysql2/promise');
 require('dotenv').config();
 
-// Tạo một Connection Pool
+// Kiểm tra môi trường Local dựa trên Host
+const isLocal = process.env.DB_HOST === 'localhost' || process.env.DB_HOST === '127.0.0.1';
+
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD, // Đảm bảo khớp với Key trên Render
+    password: process.env.DB_PASS, // Đã đổi thành DB_PASS cho khớp với .env của bạn
     database: process.env.DB_NAME,
-    port: process.env.DB_PORT || 25363, // Cổng mặc định của Aiven
+    // Local dùng 3306, Render/Aiven dùng 25363
+    port: process.env.DB_PORT || (isLocal ? 3306 : 25363), 
+    
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
-    // BẮT BUỘC: Thêm cấu hình SSL để chạy được trên Cloud (Aiven)
-    ssl: {
-        rejectUnauthorized: false
-    }
+
+    // Tự động bật SSL khi lên Cloud, Local thì tắt
+    ssl: isLocal ? null : { rejectUnauthorized: false }
 });
 
 // Kiểm tra kết nối khi khởi động
 const checkConnection = async () => {
     try {
         const connection = await pool.getConnection();
-        console.log('✅ Kết nối MySQL (Aiven) thành công!');
+        const currentPort = process.env.DB_PORT || (isLocal ? 3306 : 25363);
+        console.log(`✅ Kết nối MySQL thành công trên cổng: ${currentPort}`);
         connection.release();
     } catch (err) {
-        console.error('❌ Kết nối MySQL thất bại:', err.message);
+        console.error('❌ Kết nối MySQL thất bại!');
+        console.error('Chi tiết lỗi:', err.message);
     }
 };
 
-checkConnection(); // Mở comment này để bạn dễ theo dõi trong Log của Render
+checkConnection();
 
 module.exports = pool;
