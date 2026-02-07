@@ -30,7 +30,8 @@ const chatRoutes = require('./chat');
 router.post('/login', authController.login);
 router.post('/register', userController.register);
 router.get('/me', verifyToken, userController.getMe);
-
+router.post('/forgot-password', authController.forgotPassword); // Gửi mail
+router.post('/reset-password', authController.resetPassword);
 // Profile
 router.put('/users/update-profile/:id', verifyToken, userController.updateProfile);
 router.put('/users/change-password/:id', verifyToken, userController.changePassword);
