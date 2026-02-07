@@ -8,11 +8,14 @@ require('dotenv').config();
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     host: 'smtp.gmail.com',
-    port: 465,
-    secure: true, // Sử dụng SSL
+    port: 587, // Đổi từ 465 sang 587
+    secure: false, // Cổng 587 thì secure phải là false
     auth: {
-        user: process.env.EMAIL_USER, // Email của shop (ví dụ: shop@gmail.com)
-        pass: process.env.EMAIL_PASS  // Mật khẩu ứng dụng 16 ký tự bạn đã lấy
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    },
+    tls: {
+        rejectUnauthorized: false // Thêm dòng này để bỏ qua lỗi chứng chỉ nếu có
     }
 });
 
