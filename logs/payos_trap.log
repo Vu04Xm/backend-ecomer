@@ -1,0 +1,516 @@
+[18:45:47 22/4/2026] NHẬN REQUEST POST 
+Data: {
+  "body": {
+    "code": "00",
+    "desc": "success",
+    "data": {
+      "orderCode": 123,
+      "amount": 3000,
+      "description": "VQRIO123",
+      "accountNumber": "12345678",
+      "reference": "TF230204212323",
+      "transactionDateTime": "2023-02-04 18:25:00",
+      "paymentLinkId": "124c33293c43417ab7879e14c8d9eb18",
+      "code": "00",
+      "desc": "Thành công",
+      "counterAccountBankId": "",
+      "counterAccountBankName": "",
+      "counterAccountName": "",
+      "counterAccountNumber": "",
+      "virtualAccountName": "",
+      "virtualAccountNumber": "",
+      "currency": "VND"
+    },
+    "signature": "c8b46d662749311062fc8b9df741f727357b889098eda7a6df1b80a2d539cbc2"
+  }
+}
+------------------------------------
+[18:46:35 22/4/2026] NHẬN REQUEST POST 
+Data: {
+  "body": {
+    "code": "00",
+    "desc": "success",
+    "success": true,
+    "data": {
+      "accountNumber": "2118818888",
+      "amount": 46000,
+      "description": "DH52",
+      "reference": "FT26112968022921",
+      "transactionDateTime": "2026-04-22 17:52:32",
+      "virtualAccountNumber": "",
+      "counterAccountBankId": "970422",
+      "counterAccountBankName": "",
+      "counterAccountName": null,
+      "counterAccountNumber": "2281072020614",
+      "virtualAccountName": "",
+      "currency": "VND",
+      "orderCode": 52,
+      "paymentLinkId": "a1d3b60e88444ec1ad9d1034d1fc50b8",
+      "code": "00",
+      "desc": "success"
+    },
+    "signature": "e3bcb0f868dc035eb5f55b1e26cdecdf9adcda80dc56550d930344c2eb2382bf"
+  }
+}
+------------------------------------
+[18:54:10 22/4/2026] NHẬN REQUEST POST 
+Data: {
+  "body": {
+    "code": "00",
+    "desc": "success",
+    "success": true,
+    "data": {
+      "accountNumber": "2118818888",
+      "amount": 38501,
+      "description": "DH53",
+      "reference": "FT26112970380005",
+      "transactionDateTime": "2026-04-22 18:00:05",
+      "virtualAccountNumber": "",
+      "counterAccountBankId": "970422",
+      "counterAccountBankName": "",
+      "counterAccountName": null,
+      "counterAccountNumber": "2281072020614",
+      "virtualAccountName": "",
+      "currency": "VND",
+      "orderCode": 53,
+      "paymentLinkId": "70ec9eb084ce4589b8cdcc41d5c6f3ce",
+      "code": "00",
+      "desc": "success"
+    },
+    "signature": "7696b7f413e272e8909cd7bb6b4417282d01ed4f205fbfde03d182f1c6c2c1fd"
+  }
+}
+------------------------------------
+[19:00:57 22/4/2026] NHẬN REQUEST POST 
+Data: {
+  "body": {
+    "code": "00",
+    "desc": "success",
+    "success": true,
+    "data": {
+      "accountNumber": "2118818888",
+      "amount": 31001,
+      "description": "DH56",
+      "reference": "FT26112676246741",
+      "transactionDateTime": "2026-04-22 18:06:54",
+      "virtualAccountNumber": "",
+      "counterAccountBankId": "970422",
+      "counterAccountBankName": "",
+      "counterAccountName": null,
+      "counterAccountNumber": "2281072020614",
+      "virtualAccountName": "",
+      "currency": "VND",
+      "orderCode": 56,
+      "paymentLinkId": "e15dff5ba9a04002990233843f914215",
+      "code": "00",
+      "desc": "success"
+    },
+    "signature": "6544460316b8eee4fe764e5b97ba37564f06ffa214bed0c41506dc6c1fb6c24e"
+  }
+}
+------------------------------------
+[19:04:30 22/4/2026] NHẬN REQUEST POST 
+Data: {
+  "body": {
+    "code": "00",
+    "desc": "success",
+    "success": true,
+    "data": {
+      "accountNumber": "2118818888",
+      "amount": 38501,
+      "description": "DH62",
+      "reference": "FT26112704676405",
+      "transactionDateTime": "2026-04-22 19:04:29",
+      "virtualAccountNumber": "",
+      "counterAccountBankId": "970422",
+      "counterAccountBankName": "",
+      "counterAccountName": null,
+      "counterAccountNumber": "2281072020614",
+      "virtualAccountName": "",
+      "currency": "VND",
+      "orderCode": 62,
+      "paymentLinkId": "49b11052809542c28d17a8d47e25ef15",
+      "code": "00",
+      "desc": "success"
+    },
+    "signature": "517c51e16907f1bdc485a25b5e7aeb0993e5107bb30f7a8f2ffa3006bf57c7bd"
+  }
+}
+------------------------------------
+[19:08:28 22/4/2026] NHẬN REQUEST POST 
+Data: {
+  "body": {
+    "code": "00",
+    "desc": "success",
+    "success": true,
+    "data": {
+      "accountNumber": "2118818888",
+      "amount": 38501,
+      "description": "DH63",
+      "reference": "FT26112978923702",
+      "transactionDateTime": "2026-04-22 19:08:27",
+      "virtualAccountNumber": "",
+      "counterAccountBankId": "01202001",
+      "counterAccountBankName": "",
+      "counterAccountName": "CONG TY CP DICH VU DI DONG TRUC TUYEN",
+      "counterAccountNumber": "1770260769",
+      "virtualAccountName": "",
+      "currency": "VND",
+      "orderCode": 63,
+      "paymentLinkId": "243ddb0c1376492db27bdc81cc6b7822",
+      "code": "00",
+      "desc": "success"
+    },
+    "signature": "2c82a98368c234f7cd70633eb4413854efec06280762ba8b11b291b8fa7f6312"
+  }
+}
+------------------------------------
+[19:12:30 22/4/2026] NHẬN REQUEST POST 
+Data: {
+  "body": {
+    "code": "00",
+    "desc": "success",
+    "success": true,
+    "data": {
+      "accountNumber": "2118818888",
+      "amount": 31001,
+      "description": "DH50",
+      "reference": "FT26112285380202",
+      "transactionDateTime": "2026-04-22 17:44:27",
+      "virtualAccountNumber": "",
+      "counterAccountBankId": "970422",
+      "counterAccountBankName": "",
+      "counterAccountName": null,
+      "counterAccountNumber": "2281072020614",
+      "virtualAccountName": "",
+      "currency": "VND",
+      "orderCode": 50,
+      "paymentLinkId": "5c357e8972ed47fc945aa95610ad0a8d",
+      "code": "00",
+      "desc": "success"
+    },
+    "signature": "ac24b502af24130ca7939e9e8254eb84e1ceddb97fddab35c7e34931c5913ed7"
+  }
+}
+------------------------------------
+[19:12:31 22/4/2026] Đang xác thực chữ ký PayOS... 
+------------------------------------
+[19:12:31 22/4/2026] Xác thực chữ ký thành công! 
+Data: {}
+------------------------------------
+[19:12:55 22/4/2026] NHẬN REQUEST POST 
+Data: {
+  "body": {
+    "code": "00",
+    "desc": "success",
+    "success": true,
+    "data": {
+      "accountNumber": "2118818888",
+      "amount": 33501,
+      "description": "DH64",
+      "reference": "FT26112794902709",
+      "transactionDateTime": "2026-04-22 19:12:53",
+      "virtualAccountNumber": "",
+      "counterAccountBankId": "01201001",
+      "counterAccountBankName": "",
+      "counterAccountName": "GL Account",
+      "counterAccountNumber": "701888888",
+      "virtualAccountName": "",
+      "currency": "VND",
+      "orderCode": 64,
+      "paymentLinkId": "a19539c858b3494f98fbb3cba3fdcdf5",
+      "code": "00",
+      "desc": "success"
+    },
+    "signature": "5a91bb2d701c0483dd7ad4fc62f0fb9f4074581d3392f56554b4163c7001dd70"
+  }
+}
+------------------------------------
+[19:12:55 22/4/2026] Đang xác thực chữ ký PayOS... 
+------------------------------------
+[19:12:55 22/4/2026] Xác thực chữ ký thành công! 
+Data: {}
+------------------------------------
+[19:16:11 22/4/2026] NHẬN REQUEST POST 
+Data: {
+  "body": {
+    "code": "00",
+    "desc": "success",
+    "success": true,
+    "data": {
+      "accountNumber": "2118818888",
+      "amount": 38501,
+      "description": "DH51",
+      "reference": "FT26112061088682",
+      "transactionDateTime": "2026-04-22 17:48:08",
+      "virtualAccountNumber": "",
+      "counterAccountBankId": "970422",
+      "counterAccountBankName": "",
+      "counterAccountName": null,
+      "counterAccountNumber": "2281072020614",
+      "virtualAccountName": "",
+      "currency": "VND",
+      "orderCode": 51,
+      "paymentLinkId": "fd9fe66ad1554e4c9ff6cdf447636809",
+      "code": "00",
+      "desc": "success"
+    },
+    "signature": "963e34f0912cd70ea4b828fb29f838600f644fb16646e22b04ffea363e0635ec"
+  }
+}
+------------------------------------
+[19:16:11 22/4/2026] Đang xác thực chữ ký PayOS... 
+------------------------------------
+[19:16:11 22/4/2026] Xác thực chữ ký thành công! 
+Data: {}
+------------------------------------
+[19:16:11 22/4/2026] BẮT ĐẦU CẬP NHẬT ĐƠN HÀNG #51 
+------------------------------------
+[19:16:11 22/4/2026] HOÀN TẤT CẬP NHẬT ĐƠN HÀNG #51 THÀNH CÔNG (is_paid = 1) 
+------------------------------------
+[19:16:44 22/4/2026] NHẬN REQUEST POST 
+Data: {
+  "body": {
+    "code": "00",
+    "desc": "success",
+    "success": true,
+    "data": {
+      "accountNumber": "2118818888",
+      "amount": 38501,
+      "description": "DH65",
+      "reference": "FT26112680740690",
+      "transactionDateTime": "2026-04-22 19:16:42",
+      "virtualAccountNumber": "",
+      "counterAccountBankId": "970422",
+      "counterAccountBankName": "",
+      "counterAccountName": null,
+      "counterAccountNumber": "2281072020614",
+      "virtualAccountName": "",
+      "currency": "VND",
+      "orderCode": 65,
+      "paymentLinkId": "6a9282a15156480b9e6ab3d7df748bf8",
+      "code": "00",
+      "desc": "success"
+    },
+    "signature": "cacfd470550d9c0afaad4bb9c16ebed8ae1803227bdbce6ed890befa5e889087"
+  }
+}
+------------------------------------
+[19:16:44 22/4/2026] Đang xác thực chữ ký PayOS... 
+------------------------------------
+[19:16:44 22/4/2026] Xác thực chữ ký thành công! 
+Data: {}
+------------------------------------
+[19:16:44 22/4/2026] BẮT ĐẦU CẬP NHẬT ĐƠN HÀNG #65 
+------------------------------------
+[19:16:44 22/4/2026] HOÀN TẤT CẬP NHẬT ĐƠN HÀNG #65 THÀNH CÔNG (is_paid = 1) 
+------------------------------------
+[12:01:16 5/5/2026] NHẬN REQUEST POST 
+Data: {
+  "body": {
+    "code": "00",
+    "desc": "success",
+    "success": true,
+    "data": {
+      "accountNumber": "2118818888",
+      "amount": 31001,
+      "description": "DH67",
+      "reference": "FT26125003189042",
+      "transactionDateTime": "2026-05-05 11:41:14",
+      "virtualAccountNumber": "",
+      "counterAccountBankId": "970422",
+      "counterAccountBankName": "",
+      "counterAccountName": null,
+      "counterAccountNumber": "2281072020614",
+      "virtualAccountName": "",
+      "currency": "VND",
+      "orderCode": 67,
+      "paymentLinkId": "93fb21ab075744978975805190ed03a9",
+      "code": "00",
+      "desc": "success"
+    },
+    "signature": "8b0a71b11462a7fa30e3c7cddd8f90076507f2638274158e1dc7370b9b1cd3d4"
+  }
+}
+------------------------------------
+[12:01:16 5/5/2026] Đang xác thực chữ ký PayOS... 
+------------------------------------
+[12:01:16 5/5/2026] Xác thực chữ ký thành công! 
+Data: {}
+------------------------------------
+[12:01:16 5/5/2026] BẮT ĐẦU CẬP NHẬT ĐƠN HÀNG #67 
+------------------------------------
+[12:01:16 5/5/2026] HOÀN TẤT CẬP NHẬT ĐƠN HÀNG #67 THÀNH CÔNG (is_paid = 1) 
+------------------------------------
+[12:02:44 5/5/2026] NHẬN REQUEST POST 
+Data: {
+  "body": {}
+}
+------------------------------------
+[12:02:44 5/5/2026] Đang xác thực chữ ký PayOS... 
+------------------------------------
+[12:02:44 5/5/2026] Xác thực chữ ký thành công! 
+Data: {}
+------------------------------------
+[12:02:44 5/5/2026] KHÔNG TÌM THẤY orderCode TRONG DỮ LIỆU ĐÃ XÁC THỰC 
+------------------------------------
+[12:07:13 5/5/2026] NHẬN REQUEST GET 
+Data: {}
+------------------------------------
+[12:13:13 5/5/2026] NHẬN REQUEST HEAD 
+Data: {}
+------------------------------------
+[12:13:13 5/5/2026] Đang xác thực chữ ký PayOS... 
+------------------------------------
+[12:13:13 5/5/2026] Xác thực chữ ký thành công! 
+Data: {}
+------------------------------------
+[12:13:13 5/5/2026] LỖI CỰC NGHIÊM TRỌNG TRONG WEBHOOK: 
+Data: "Cannot read properties of undefined (reading 'data')"
+------------------------------------
+[12:17:02 5/5/2026] NHẬN REQUEST POST 
+Data: {
+  "body": {
+    "code": "00",
+    "desc": "success",
+    "data": {
+      "orderCode": 123,
+      "amount": 3000,
+      "description": "VQRIO123",
+      "accountNumber": "12345678",
+      "reference": "TF230204212323",
+      "transactionDateTime": "2023-02-04 18:25:00",
+      "paymentLinkId": "124c33293c43417ab7879e14c8d9eb18",
+      "code": "00",
+      "desc": "Thành công",
+      "counterAccountBankId": "",
+      "counterAccountBankName": "",
+      "counterAccountName": "",
+      "counterAccountNumber": "",
+      "virtualAccountName": "",
+      "virtualAccountNumber": "",
+      "currency": "VND"
+    },
+    "signature": "c8b46d662749311062fc8b9df741f727357b889098eda7a6df1b80a2d539cbc2"
+  }
+}
+------------------------------------
+[12:17:02 5/5/2026] Đang xác thực chữ ký PayOS... 
+------------------------------------
+[12:17:02 5/5/2026] Xác thực chữ ký thành công! 
+Data: {}
+------------------------------------
+[12:17:02 5/5/2026] BẮT ĐẦU CẬP NHẬT ĐƠN HÀNG #123 
+------------------------------------
+[12:17:02 5/5/2026] CẬP NHẬT THẤT BẠI (Lỗi DB hoặc đơn đã xử lý) #123 
+------------------------------------
+[12:21:39 5/5/2026] NHẬN REQUEST POST 
+Data: {
+  "body": {
+    "code": "00",
+    "desc": "success",
+    "success": true,
+    "data": {
+      "accountNumber": "2118818888",
+      "amount": 31001,
+      "description": "DH68",
+      "reference": "FT26125617648009",
+      "transactionDateTime": "2026-05-05 12:21:38",
+      "virtualAccountNumber": "",
+      "counterAccountBankId": "970422",
+      "counterAccountBankName": "",
+      "counterAccountName": null,
+      "counterAccountNumber": "2281072020614",
+      "virtualAccountName": "",
+      "currency": "VND",
+      "orderCode": 68,
+      "paymentLinkId": "6a52f1d0ffbd480c8a68015a4d093023",
+      "code": "00",
+      "desc": "success"
+    },
+    "signature": "4dc74eb46ad0995247d3e43695e2e7b775db8ebc484f900a7e265bb4f1edfc38"
+  }
+}
+------------------------------------
+[12:21:39 5/5/2026] Đang xác thực chữ ký PayOS... 
+------------------------------------
+[12:21:39 5/5/2026] Xác thực chữ ký thành công! 
+Data: {}
+------------------------------------
+[12:21:39 5/5/2026] BẮT ĐẦU CẬP NHẬT ĐƠN HÀNG #68 
+------------------------------------
+[12:21:39 5/5/2026] HOÀN TẤT CẬP NHẬT ĐƠN HÀNG #68 THÀNH CÔNG (is_paid = 1) 
+------------------------------------
+[08:42:28 7/5/2026] NHẬN REQUEST POST 
+Data: {
+  "body": {
+    "code": "00",
+    "desc": "success",
+    "data": {
+      "orderCode": 123,
+      "amount": 3000,
+      "description": "VQRIO123",
+      "accountNumber": "12345678",
+      "reference": "TF230204212323",
+      "transactionDateTime": "2023-02-04 18:25:00",
+      "paymentLinkId": "124c33293c43417ab7879e14c8d9eb18",
+      "code": "00",
+      "desc": "Thành công",
+      "counterAccountBankId": "",
+      "counterAccountBankName": "",
+      "counterAccountName": "",
+      "counterAccountNumber": "",
+      "virtualAccountName": "",
+      "virtualAccountNumber": "",
+      "currency": "VND"
+    },
+    "signature": "c8b46d662749311062fc8b9df741f727357b889098eda7a6df1b80a2d539cbc2"
+  }
+}
+------------------------------------
+[08:42:28 7/5/2026] Đang xác thực chữ ký PayOS... 
+------------------------------------
+[08:42:28 7/5/2026] Xác thực chữ ký thành công! 
+Data: {}
+------------------------------------
+[08:42:28 7/5/2026] BẮT ĐẦU CẬP NHẬT ĐƠN HÀNG #123 
+------------------------------------
+[08:42:28 7/5/2026] CẬP NHẬT THẤT BẠI (Lỗi DB hoặc đơn đã xử lý) #123 
+------------------------------------
+[08:45:15 7/5/2026] NHẬN REQUEST POST 
+Data: {
+  "body": {
+    "code": "00",
+    "desc": "success",
+    "success": true,
+    "data": {
+      "accountNumber": "2118818888",
+      "amount": 31001,
+      "description": "DH72",
+      "reference": "FT26127153017165",
+      "transactionDateTime": "2026-05-07 08:45:15",
+      "virtualAccountNumber": "",
+      "counterAccountBankId": "970422",
+      "counterAccountBankName": "",
+      "counterAccountName": null,
+      "counterAccountNumber": "2281072020614",
+      "virtualAccountName": "",
+      "currency": "VND",
+      "orderCode": 72,
+      "paymentLinkId": "d68e572621004d10bcc8e75bac0af738",
+      "code": "00",
+      "desc": "success"
+    },
+    "signature": "0431d5305e2b1811104ca179267b234faa110fe0b5220b8cc6640c60401dca5d"
+  }
+}
+------------------------------------
+[08:45:15 7/5/2026] Đang xác thực chữ ký PayOS... 
+------------------------------------
+[08:45:15 7/5/2026] Xác thực chữ ký thành công! 
+Data: {}
+------------------------------------
+[08:45:15 7/5/2026] BẮT ĐẦU CẬP NHẬT ĐƠN HÀNG #72 
+------------------------------------
+[08:45:15 7/5/2026] HOÀN TẤT CẬP NHẬT ĐƠN HÀNG #72 THÀNH CÔNG (is_paid = 1) 
+------------------------------------

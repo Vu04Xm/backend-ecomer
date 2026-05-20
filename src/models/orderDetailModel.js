@@ -21,24 +21,25 @@ const orderDetailModel = {
     // 2. Lưu từng sản phẩm vào đơn hàng
     create: async (data) => {
         try {
-            const { order_id, product_id, quantity, price_at_purchase } = data;
+            const { order_id, product_id, quantity, price_at_purchase, cost_at_purchase } = data;
             
             if (!order_id || !product_id || !quantity) {
                 throw new Error("Dữ liệu chi tiết đơn hàng không đầy đủ!");
             }
 
-            // CHỈNH SỬA TẠI ĐÂY: Thêm cột status_time và gán giá trị NOW()
             const query = `
                 INSERT INTO orderdetails 
-                (order_id, product_id, quantity, price_at_purchase, status_time) 
-                VALUES (?, ?, ?, ?, NOW())
+                (order_id, product_id, quantity, price_at_purchase, cost_at_purchase, status, status_time) 
+                VALUES (?, ?, ?, ?, ?, ?, NOW())
             `;
 
             const [result] = await db.query(query, [
                 order_id, 
                 product_id, 
                 quantity, 
-                price_at_purchase
+                price_at_purchase,
+                cost_at_purchase || 0,
+                'pending'
             ]);
             return result;
         } catch (error) {

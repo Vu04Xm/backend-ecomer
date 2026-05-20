@@ -81,6 +81,37 @@ const userModel = {
     deleteUser: async (id) => {
         const [result] = await db.query('DELETE FROM users WHERE id = ?', [id]);
         return result;
+    },
+
+    // 9. Cập nhật Refresh Token
+    updateRefreshToken: async (id, refreshToken) => {
+        const query = 'UPDATE users SET refresh_token = ? WHERE id = ?';
+        const [result] = await db.query(query, [refreshToken, id]);
+        return result;
+    },
+
+    // 10. Tìm User bằng Refresh Token
+    findByRefreshToken: async (refreshToken) => {
+        const [rows] = await db.query('SELECT * FROM users WHERE refresh_token = ?', [refreshToken]);
+        return rows[0];
+    },
+    // 11. Lưu mã OTP và thời gian hết hạn (5 phút)
+    saveOTP: async (email, otp) => {
+        const query = 'UPDATE users SET otp = ?, otp_expiry = DATE_ADD(NOW(), INTERVAL 5 MINUTE) WHERE email = ?';
+        const [result] = await db.query(query, [otp, email]);
+        return result;
+    },
+    // 12. Kiểm tra mã OTP và hạn dùng
+    verifyOTP: async (email, otp) => {
+        const query = 'SELECT id FROM users WHERE email = ? AND otp = ? AND otp_expiry > NOW()';
+        const [rows] = await db.query(query, [email, otp]);
+        return rows[0];
+    },
+    // 13. Xóa OTP sau khi sử dụng thành công
+    clearOTP: async (email) => {
+        const query = 'UPDATE users SET otp = NULL, otp_expiry = NULL WHERE email = ?';
+        const [result] = await db.query(query, [email]);
+        return result;
     }
 };
 

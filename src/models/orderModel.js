@@ -7,7 +7,9 @@ const orderModel = {
             const query = `
                 SELECT 
                     o.*, 
-                    u.full_name as customer_name 
+                    u.full_name as customer_name,
+                    u.phone as customer_phone,
+                    u.email as customer_email
                 FROM orders o
                 LEFT JOIN users u ON o.user_id = u.id 
                 WHERE o.status NOT IN ('Delivered', 'Cancelled')
@@ -21,7 +23,7 @@ const orderModel = {
         }
     },
 
-    // 2. Lấy đơn hàng theo ID (Dùng order_id làm khóa chính)
+    // 2. Lấy đơn hàng theo ID
     getById: async (orderId) => {
         const query = "SELECT * FROM orders WHERE order_id = ?";
         const [rows] = await db.query(query, [orderId]);
@@ -31,7 +33,11 @@ const orderModel = {
     // 3. Lấy lịch sử đơn hàng đã xong hoặc đã hủy
     getHistory: async () => {
         const query = `
-            SELECT o.*, u.full_name as customer_name 
+            SELECT 
+                o.*, 
+                u.full_name as customer_name,
+                u.phone as customer_phone,
+                u.email as customer_email
             FROM orders o
             LEFT JOIN users u ON o.user_id = u.id 
             WHERE o.status IN ('Delivered', 'Cancelled')
@@ -41,9 +47,8 @@ const orderModel = {
         return rows;
     },
 
-    // 4. Lấy danh sách sản phẩm trong đơn hàng (Cực kỳ quan trọng để trừ kho)
+    // 4. Lấy danh sách sản phẩm trong đơn hàng
     getOrderItems: async (orderId) => {
-        // Lấy product_id và quantity từ bảng chi tiết
         const query = "SELECT product_id, quantity FROM orderdetails WHERE order_id = ?"; 
         const [rows] = await db.query(query, [orderId]);
         return rows;
@@ -61,8 +66,7 @@ const orderModel = {
     // 6. Tạo đơn hàng mới (Bảng orders)
     create: async (data) => {
         const { userId, totalAmount, paymentMethod, address, customerName, phone } = data;
-        // Gộp thông tin người nhận vào một cột shipping_address nếu DB của bạn thiết kế vậy
-        const fullShippingInfo = `Người nhận: ${customerName} | SĐT: ${phone} | ĐC: ${address}`;
+        const fullShippingInfo = `Người nhận: ${customerName} | SĐT: ${phone} | Địa chỉ: ${address}`;
 
         const query = `
             INSERT INTO orders (user_id, total_amount, payment_method, status, shipping_address) 
@@ -80,15 +84,13 @@ const orderModel = {
         return result;
     },
 
-    // 7. Cập nhật trạng thái đơn hàng (Có ràng buộc logic)
+    // 7. Cập nhật trạng thái đơn hàng
     updateStatus: async (orderId, newStatus) => {
-        // Lấy trạng thái hiện tại để kiểm tra logic
         const [rows] = await db.query('SELECT status FROM orders WHERE order_id = ?', [orderId]);
         if (rows.length === 0) throw new Error("Đơn hàng không tồn tại!");
 
         const currentStatus = rows[0].status;
 
-        // Trọng số quy trình
         const priority = {
             'Pending': 1,
             'Confirmed': 2,
@@ -100,8 +102,6 @@ const orderModel = {
         const currentP = priority[currentStatus];
         const newP = priority[newStatus];
 
-        // --- RÀNG BUỘC LOGIC ---
-        // Không cho phép sửa nếu đã xong hoặc đã hủy
         if (currentStatus === 'Delivered' || currentStatus === 'Cancelled') {
             throw new Error(`Đơn hàng đã ${currentStatus === 'Delivered' ? 'hoàn tất' : 'bị hủy'}, không thể thay đổi.`);
         }
@@ -109,22 +109,26 @@ const orderModel = {
         if (newStatus === 'Cancelled') {
             if (currentP > 2) throw new Error("Đơn hàng đang giao, không thể hủy!");
         } else {
-            // Chặn đi lùi quy trình
-            if (newP < currentP) {
-                throw new Error(`Không thể chuyển ngược từ ${currentStatus} về ${newStatus}!`);
-            }
-            // Chặn nhảy bước quá xa (ví dụ từ Pending nhảy thẳng lên Delivered)
-            if (newP > currentP + 1) {
-                throw new Error(`Phải chuyển trạng thái theo trình tự. Hiện tại là: ${currentStatus}`);
-            }
+            if (newP < currentP) throw new Error(`Không thể chuyển ngược từ ${currentStatus} về ${newStatus}!`);
+            if (newP > currentP + 1) throw new Error(`Phải chuyển trạng thái theo trình tự. Hiện tại là: ${currentStatus}`);
         }
 
-        // --- THỰC THI ---
         const [result] = await db.query(
             'UPDATE orders SET status = ? WHERE order_id = ?',
             [newStatus, orderId]
         );
 
+        return result;
+    },
+
+    // 8. Hủy đơn hàng kèm lý do và người thực hiện (TH1 + TH4)
+    cancelWithReason: async (orderId, reason, cancelledBy) => {
+        const query = `
+            UPDATE orders 
+            SET status = 'Cancelled', cancel_reason = ?, cancelled_by = ?
+            WHERE order_id = ?
+        `;
+        const [result] = await db.query(query, [reason, cancelledBy, orderId]);
         return result;
     }
 };

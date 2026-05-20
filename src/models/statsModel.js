@@ -33,16 +33,17 @@ const statsController = {
             ]);
 
             // 3. Truy vấn Top 5 Sản phẩm bán chạy
-            // Lọc theo orderdetails.status = 'delivered' và status_time
-            let filterOD = " WHERE od.status = 'delivered' ";
+            // Lọc theo order_details.status = 'delivered'
+            let filterOD = " WHERE o.status = 'Delivered' ";
             let odParams = [];
-            if (year) { filterOD += " AND YEAR(od.status_time) = ? "; odParams.push(parseInt(year)); }
-            if (month) { filterOD += " AND MONTH(od.status_time) = ? "; odParams.push(parseInt(month)); }
-            if (day) { filterOD += " AND DATE(od.status_time) = ? "; odParams.push(day); }
+            if (year) { filterOD += " AND YEAR(o.created_at) = ? "; odParams.push(parseInt(year)); }
+            if (month) { filterOD += " AND MONTH(o.created_at) = ? "; odParams.push(parseInt(month)); }
+            if (day) { filterOD += " AND DATE(o.created_at) = ? "; odParams.push(day); }
 
             const [topProducts] = await db.query(`
                 SELECT p.name, SUM(od.quantity) as totalSold 
                 FROM orderdetails od 
+                JOIN orders o ON od.order_id = o.order_id
                 JOIN products p ON od.product_id = p.id 
                 ${filterOD}
                 GROUP BY p.id 

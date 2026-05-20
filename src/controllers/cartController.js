@@ -49,6 +49,15 @@ const cartController = {
         } catch (error) {
             res.status(500).json({ error: error.message });
         }
+    },
+
+    clearCart: async (req, res) => {
+        try {
+            await cartModel.clearByUserId(req.params.userId);
+            res.status(200).json({ message: "Đã làm sạch giỏ hàng" });
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
     }
 };
 

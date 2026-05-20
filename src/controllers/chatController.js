@@ -2,9 +2,6 @@ const pool = require('../configs/db');
 
 exports.handleChat = async (req, res) => {
     const { message } = req.body;
-    
-    // BẢO MẬT: Ưu tiên lấy Key từ .env, nếu không có mới dùng key mặc định
-    // Điều này giúp bạn không bị lộ key khi đẩy code lên GitHub
     const apiKey = process.env.OPENAI_API_KEY; 
 
     if (!apiKey) {
@@ -12,72 +9,65 @@ exports.handleChat = async (req, res) => {
     }
 
     try {
-        // --- BƯỚC 1: TỰ ĐỘNG DÒ MODEL HỢP LỆ ---
+        // --- BƯỚC 1: DÒ MODEL ---
         const listModelsUrl = `https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`;
         const listRes = await fetch(listModelsUrl);
         const listData = await listRes.json();
 
         if (listData.error) {
-            throw new Error(`Google API Error: ${listData.error.message}`);
+            if (listData.error.message.includes("high demand")) {
+                return res.json({ success: true, reply: "Dạ AI đang bận chút, bạn hỏi lại sau 10 giây nhé! 🙏" });
+            }
+            throw new Error(listData.error.message);
         }
 
-        const selectedModel = listData.models?.find(m => m.name.includes("gemini-1.5-flash")) || 
-                             listData.models?.find(m => m.supportedGenerationMethods.includes("generateContent"));
+        let selectedModel = listData.models?.find(m => m.name.includes("gemini-1.5-flash")) || 
+                           listData.models?.find(m => m.name.includes("gemini-1.0-pro")) ||
+                           listData.models?.find(m => m.supportedGenerationMethods.includes("generateContent"));
 
-        if (!selectedModel) {
-            return res.status(403).json({ success: false, error: "Key này chưa được kích hoạt cho Gemini." });
-        }
+        if (!selectedModel) return res.status(403).json({ success: false, error: "Tài khoản không đủ quyền." });
 
         const modelName = selectedModel.name;
-        console.log(`🚀 AI đang sử dụng model: ${modelName}`);
 
-        // --- BƯỚC 2: TRUY VẤN DỮ LIỆU THÔNG MINH (GIỮ NGUYÊN LOGIC CỦA BẠN) ---
+        // --- BƯỚC 2: TRUY VẤN KHO HÀNG THÔNG MINH ---
+        // Tách từ khóa để tìm kiếm linh hoạt (Ví dụ: "Xiaomi Pad 7 4 1" -> tìm "Xiaomi" hoặc "Pad" hoặc "7")
+        const keywords = message.split(' ').filter(k => k.length > 1);
+        const searchConditions = keywords.map(() => `p.name LIKE ?`).join(' OR ');
+        const searchValues = keywords.map(k => `%${k}%`);
+
         const [rows] = await pool.execute(`
-            SELECT p.name, p.price, p.discount, p.description, b.name as brand
+            SELECT p.id, p.name, p.price, p.discount, p.description, p.status, b.name as brand
             FROM products p
             LEFT JOIN brands b ON p.brand_id = b.id
-            WHERE p.status = 'In Stock' 
-            AND (p.name LIKE ? OR b.name LIKE ? OR ? LIKE CONCAT('%', p.name, '%'))
-            LIMIT 50
-        `, [`%${message}%`, `%${message}%`, message]);
+            WHERE (${searchConditions} OR p.name LIKE ? OR ? LIKE CONCAT('%', p.name, '%'))
+            LIMIT 20
+        `, [...searchValues, `%${message}%`, message]);
 
-        let finalRows = rows;
-        if (finalRows.length === 0) {
-            const [fallbackRows] = await pool.execute(`
-                SELECT p.name, p.price, p.discount, p.description, b.name as brand
+        let productList = rows;
+        // Nếu không tìm thấy gì theo từ khóa, lấy top 10 sản phẩm mới nhất làm gợi ý
+        if (productList.length === 0) {
+            const [latest] = await pool.execute(`
+                SELECT p.id, p.name, p.price, p.discount, p.description, p.status, b.name as brand
                 FROM products p
                 LEFT JOIN brands b ON p.brand_id = b.id
-                WHERE p.status = 'In Stock'
-                ORDER BY p.id DESC LIMIT 15
+                ORDER BY p.id DESC LIMIT 10
             `);
-            finalRows = fallbackRows;
+            productList = latest;
         }
 
-        // --- BƯỚC 3: XỬ LÝ DỮ LIỆU JSON & TẠO CONTEXT (GIỮ NGUYÊN FORMAT CỦA BẠN) ---
-        const productContext = finalRows.map(p => {
-            const finalPrice = (p.price - p.discount).toLocaleString();
-            
-            let techSpecs = "";
+        // --- BƯỚC 3: TẠO CONTEXT ---
+        const context = productList.map(p => {
+            const pPrice = Math.round(Number(p.price || 0) - Number(p.discount || 0)).toLocaleString();
+            let specsStr = "";
             try {
-                const descObj = (typeof p.description === 'object' && p.description !== null) 
-                    ? p.description 
-                    : JSON.parse(p.description || "{}");
+                const specs = (typeof p.description === 'object') ? p.description : JSON.parse(p.description || "{}");
+                specsStr = Object.entries(specs).map(([k, v]) => `${k.toUpperCase()}: ${v}`).join(', ');
+            } catch (e) { specsStr = p.description || "Máy chính hãng"; }
 
-                techSpecs = Object.entries(descObj)
-                    .map(([key, value]) => `${key.toUpperCase()}: ${value}`)
-                    .join(', ');
-            } catch (e) {
-                techSpecs = p.description || "Đang cập nhật";
-            }
-
-            return `SẢN PHẨM: ${p.name}
-            - Thương hiệu: ${p.brand}
-            - Giá bán cuối: ${finalPrice}đ
-            - Thông số kỹ thuật chi tiết: ${techSpecs}
-            -----------------------`;
+            return `[SẢN PHẨM]: ${p.name} | [GIÁ]: ${pPrice}đ | [TRẠNG THÁI]: ${p.status} | [SPECS]: ${specsStr}`;
         }).join('\n');
 
-        // --- BƯỚC 4: GỬI DỮ LIỆU CHO AI (GIỮ NGUYÊN PHẦN TRAINING CỦA BẠN) ---
+        // --- BƯỚC 4: TRAINING AI CỰC KỲ LINH HOẠT ---
         const chatUrl = `https://generativelanguage.googleapis.com/v1beta/${modelName}:generateContent?key=${apiKey}`;
         const chatRes = await fetch(chatUrl, {
             method: 'POST',
@@ -85,34 +75,38 @@ exports.handleChat = async (req, res) => {
             body: JSON.stringify({
                 contents: [{
                     parts: [{
-                        text: `Bạn là trợ lý ảo chuyên gia công nghệ của cửa hàng Cellphones.
-                        Dưới đây là thông tin thực tế từ kho hàng (đã xử lý từ dữ liệu hệ thống):
-                        ${productContext}
+                        text: `BẠN LÀ CHUYÊN GIA TƯ VẤN SẢN PHẨM CỦA CELLPHONES.
+                        
+                        NHIỆM VỤ:
+                        1. Dựa vào DANH SÁCH KHO HÀNG bên dưới để trả lời.
+                        2. NẾU KHÁCH HỎI TÊN SẢN PHẨM KHÔNG KHỚP 100%, hãy tìm sản phẩm có tên GẦN GIỐNG NHẤT trong danh sách để giới thiệu. TUYỆT ĐỐI KHÔNG báo "không tìm thấy" nếu có sản phẩm tương tự.
+                        3. Nếu sản phẩm trong kho ghi "Out of Stock", hãy báo là "Dạ mẫu này hiện đang tạm hết, anh/chị tham khảo mẫu tương đương nhé".
+                        4. Trả lời thân thiện, tư vấn nhiệt tình như nhân viên bán hàng.
 
-                        YÊU CẦU TRẢ LỜI:
-                        1. Tuyệt đối dựa vào "Thông số kỹ thuật chi tiết" để trả lời về RAM, CPU, SSD...
-                        2. Luôn báo mức "Giá bán cuối" đã tính toán sẵn ở trên.
-                        3. Nếu khách hỏi sản phẩm không có trong danh sách, hãy báo "Dạ hiện tại máy này bên em đang hết hàng" và gợi ý máy tương đương có trong danh sách.
-                        4. Trả lời thân thiện, chuyên nghiệp, súc tích.
-                        5. Trình bày các thông số kỹ thuật theo dạng danh sách gạch đầu dòng rõ ràng.
-                        6. Mỗi thông số nằm trên một dòng riêng biệt.
+                        DANH SÁCH KHO HÀNG THỰC TẾ:
+                        ${context || "Hiện kho đang cập nhật thêm sản phẩm mới."}
 
-                        Câu hỏi của khách: ${message}`
+                        CÂU HỎI KHÁCH HÀNG: ${message}`
                     }]
                 }]
             })
         });
 
         const chatData = await chatRes.json();
+        
+        if (chatData.error) {
+            if (chatData.error.message.includes("high demand")) return res.json({ success: true, reply: "AI đang quá tải, bạn hỏi lại sau 10 giây nhé! 🙏" });
+            throw new Error(chatData.error.message);
+        }
 
         if (chatData.candidates && chatData.candidates[0].content) {
             res.json({ success: true, reply: chatData.candidates[0].content.parts[0].text });
         } else {
-            res.status(500).json({ success: false, error: "AI không thể trả lời.", detail: chatData });
+            res.json({ success: true, reply: "Dạ, hiện tại em chưa tìm được thông tin chính xác, anh/chị muốn tìm dòng máy của hãng nào để em hỗ trợ tốt hơn ạ?" });
         }
 
     } catch (error) {
-        console.error("❌ LỖI HỆ THỐNG:", error.message);
-        res.status(500).json({ success: false, error: error.message });
+        console.error("🔥 ERROR:", error.stack);
+        res.status(500).json({ success: false, error: "Hệ thống AI đang bảo trì, vui lòng thử lại sau." });
     }
 };

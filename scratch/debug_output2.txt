@@ -1,0 +1,88 @@
+=== PRODUCT 197 ===
+{
+  "id": 197,
+  "category_id": 3,
+  "brand_id": 12,
+  "name": "1",
+  "price": "2000.00",
+  "discount": "0.00",
+  "quantity": 54,
+  "description": {
+    "brand": "Apple",
+    "model": "iPhone 15 Pro Max",
+    "specs": {
+      "cpu": "A17 Pro",
+      "ram": "8GB",
+      "screen": "6.7 inch, Super Retina XDR",
+      "battery": "4422 mAh",
+      "storage": "256GB"
+    },
+    "origin": "VN/A",
+    "features": [
+      "Khung viền Titanium siêu bền",
+      "Camera chính 48MP zoom quang học 5x",
+      "Cổng sạc USB-C tốc độ cao",
+      "Nút Action tùy chỉnh linh hoạt"
+    ],
+    "warranty": "12 tháng chính hãng"
+  },
+  "status": "In Stock",
+  "product_image": "https://cdn.tgdd.vn/Products/Images/42/363438/realme-p4-power-5g-12gb-256gb-cam-thumb-1-2-600x600.jpg"
+}
+
+=== USER 30 ===
+{
+  "id": 30,
+  "full_name": "Đào Tuấn Vũ",
+  "email": "tuanvu0429@gmail.com",
+  "role_id": 3
+}
+
+=== ALL ORDERS for USER 30 ===
+  #42 | total: 38501.00 | status: Pending | created: Wed Apr 22 2026 16:57:21 GMT+0700 (Indochina Time)
+  #41 | total: 46000.00 | status: Pending | created: Wed Apr 22 2026 16:56:25 GMT+0700 (Indochina Time)
+  #40 | total: 46000.00 | status: Delivered | created: Mon Apr 20 2026 22:43:27 GMT+0700 (Indochina Time)
+  #39 | total: 46000.00 | status: Delivered | created: Mon Apr 20 2026 22:20:34 GMT+0700 (Indochina Time)
+  #38 | total: 11234000.00 | status: Cancelled | created: Mon Apr 20 2026 21:33:39 GMT+0700 (Indochina Time)
+  #37 | total: 8224000.00 | status: Cancelled | created: Mon Apr 20 2026 21:32:18 GMT+0700 (Indochina Time)
+  #36 | total: 8226501.00 | status: Cancelled | created: Thu Apr 16 2026 22:02:38 GMT+0700 (Indochina Time)
+  #35 | total: 2000.00 | status: Delivered | created: Wed Apr 15 2026 20:53:08 GMT+0700 (Indochina Time)
+  #34 | total: 2000.00 | status: Cancelled | created: Wed Apr 15 2026 20:27:24 GMT+0700 (Indochina Time)
+  #33 | total: 2000.00 | status: Cancelled | created: Wed Apr 15 2026 20:23:06 GMT+0700 (Indochina Time)
+  #32 | total: 2000.00 | status: Cancelled | created: Wed Apr 15 2026 20:15:45 GMT+0700 (Indochina Time)
+  #31 | total: 2000.00 | status: Cancelled | created: Wed Apr 15 2026 20:10:13 GMT+0700 (Indochina Time)
+  #30 | total: 2000.00 | status: Cancelled | created: Wed Apr 15 2026 19:57:24 GMT+0700 (Indochina Time)
+  #29 | total: 2000.00 | status: Cancelled | created: Wed Apr 15 2026 19:20:53 GMT+0700 (Indochina Time)
+  #28 | total: 2000.00 | status: Cancelled | created: Wed Apr 15 2026 19:10:12 GMT+0700 (Indochina Time)
+  #27 | total: 2000.00 | status: Cancelled | created: Wed Apr 15 2026 19:06:27 GMT+0700 (Indochina Time)
+  #26 | total: 2000.00 | status: Cancelled | created: Wed Apr 15 2026 19:05:04 GMT+0700 (Indochina Time)
+  #25 | total: 2000.00 | status: Cancelled | created: Wed Apr 15 2026 19:04:56 GMT+0700 (Indochina Time)
+  #24 | total: 2000.00 | status: Cancelled | created: Wed Apr 15 2026 19:01:30 GMT+0700 (Indochina Time)
+  #23 | total: 2000.00 | status: Cancelled | created: Wed Apr 15 2026 19:00:29 GMT+0700 (Indochina Time)
+  #22 | total: 2000.00 | status: Cancelled | created: Wed Apr 15 2026 18:58:32 GMT+0700 (Indochina Time)
+  #21 | total: 2000.00 | status: Cancelled | created: Wed Apr 15 2026 18:55:18 GMT+0700 (Indochina Time)
+  #20 | total: 2000.00 | status: Delivered | created: Wed Apr 15 2026 18:47:15 GMT+0700 (Indochina Time)
+  #19 | total: 2000.00 | status: Delivered | created: Wed Apr 15 2026 18:44:25 GMT+0700 (Indochina Time)
+  #18 | total: 2000.00 | status: Delivered | created: Wed Apr 15 2026 18:35:10 GMT+0700 (Indochina Time)
+  #17 | total: 8190000.00 | status: Delivered | created: Wed Apr 15 2026 18:28:14 GMT+0700 (Indochina Time)
+  #16 | total: 15190000.00 | status: Cancelled | created: Wed Apr 15 2026 18:26:36 GMT+0700 (Indochina Time)
+  #15 | total: 8190000.00 | status: Cancelled | created: Wed Apr 15 2026 18:24:43 GMT+0700 (Indochina Time)
+  #14 | total: 15190000.00 | status: Cancelled | created: Wed Apr 15 2026 18:22:59 GMT+0700 (Indochina Time)
+  #13 | total: 8190000.00 | status: Cancelled | created: Wed Apr 15 2026 18:18:45 GMT+0700 (Indochina Time)
+  #12 | total: 8190000.00 | status: Cancelled | created: Wed Apr 15 2026 18:14:19 GMT+0700 (Indochina Time)
+  #11 | total: 8190000.00 | status: Cancelled | created: Wed Apr 15 2026 18:12:48 GMT+0700 (Indochina Time)
+  #10 | total: 8190000.00 | status: Cancelled | created: Wed Apr 15 2026 18:12:13 GMT+0700 (Indochina Time)
+  #9 | total: 8190000.00 | status: Cancelled | created: Wed Apr 15 2026 18:11:19 GMT+0700 (Indochina Time)
+  #8 | total: 15190000.00 | status: Cancelled | created: Wed Apr 15 2026 18:06:37 GMT+0700 (Indochina Time)
+  #7 | total: 15190000.00 | status: Cancelled | created: Wed Apr 15 2026 18:03:46 GMT+0700 (Indochina Time)
+  #6 | total: 15190000.00 | status: Cancelled | created: Wed Apr 15 2026 18:00:37 GMT+0700 (Indochina Time)
+  #5 | total: 15190000.00 | status: Cancelled | created: Wed Apr 15 2026 17:56:37 GMT+0700 (Indochina Time)
+  #4 | total: 15190000.00 | status: Cancelled | created: Wed Apr 15 2026 17:55:51 GMT+0700 (Indochina Time)
+  #3 | total: 15190000.00 | status: Cancelled | created: Wed Apr 15 2026 17:54:28 GMT+0700 (Indochina Time)
+
+=== WASHING MACHINE PRODUCTS ===
+  id: 78 | name: May giat samsung inverter 13kg wa80f13s5bsv 10 | price: 15190000.00 | discount: 20.00
+  id: 79 | name: May giat say aqua inverter giat 10kg say 7kg aqd ah1051j ps 1 | price: 23190000.00 | discount: 10.00
+
+=== CURRENT CART for USER 30 ===
+  (empty - cleared after last order)

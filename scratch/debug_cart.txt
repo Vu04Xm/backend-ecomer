@@ -1,0 +1,54 @@
+=== CART DATA FOR USER 30 ===
+[]
+
+=== LATEST ORDER ===
+{
+  "order_id": 43,
+  "user_id": 30,
+  "total_amount": "33501.00",
+  "payment_method": "COD",
+  "status": "Pending",
+  "created_at": "2026-04-22T10:11:13.000Z",
+  "shipping_address": "Người nhận: Đào Tuấn Vũ | SĐT: 0987654325 | ĐC: kkkk, Xã Quỳnh Sơn, Thành phố Bắc Giang, Bắc Giang",
+  "is_paid": 0
+}
+
+=== LATEST ORDER DETAILS ===
+[
+  {
+    "order_detail_id": 9,
+    "order_id": 43,
+    "product_id": 78,
+    "quantity": 1,
+    "price_at_purchase": "750000.00",
+    "status": "cancelled",
+    "status_time": "2026-02-08T19:20:20.000Z"
+  },
+  {
+    "order_detail_id": 10,
+    "order_id": 43,
+    "product_id": 79,
+    "quantity": 1,
+    "price_at_purchase": "8490000.00",
+    "status": "cancelled",
+    "status_time": "2026-02-08T19:20:20.000Z"
+  },
+  {
+    "order_detail_id": 11,
+    "order_id": 43,
+    "product_id": 80,
+    "quantity": 1,
+    "price_at_purchase": "35000000.00",
+    "status": "cancelled",
+    "status_time": "2026-02-08T19:20:20.000Z"
+  },
+  {
+    "order_detail_id": 56,
+    "order_id": 43,
+    "product_id": 197,
+    "quantity": 1,
+    "price_at_purchase": "2000.00",
+    "status": "pending",
+    "status_time": "2026-04-22T10:11:13.000Z"
+  }
+]

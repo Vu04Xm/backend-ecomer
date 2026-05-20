@@ -24,7 +24,20 @@ const reviewModel = {
         return result;
     },
 
-    // 3. Xóa đánh giá (Dành cho Admin hoặc người dùng muốn xóa bài của mình)
+    // 3. Kiểm tra xem người dùng đã mua sản phẩm này chưa (Trạng thái đơn hàng phải là 'Delivered')
+    checkPurchase: async (userId, productId) => {
+        const query = `
+            SELECT od.order_id 
+            FROM orderdetails od
+            JOIN orders o ON od.order_id = o.order_id
+            WHERE o.user_id = ? AND od.product_id = ? AND o.status = 'Delivered'
+            LIMIT 1
+        `;
+        const [rows] = await db.query(query, [userId, productId]);
+        return rows.length > 0;
+    },
+
+    // 4. Xóa đánh giá (Dành cho Admin hoặc người dùng muốn xóa bài của mình)
     delete: async (id) => {
         const [result] = await db.query('DELETE FROM reviews WHERE id = ?', [id]);
         return result;

@@ -7,6 +7,19 @@ const brandModel = {
         return rows;
     },
 
+    // Lấy thương hiệu có sản phẩm thuộc danh mục cụ thể
+    getBrandsByCategory: async (categoryId) => {
+        const query = `
+            SELECT DISTINCT b.* 
+            FROM brands b
+            INNER JOIN products p ON p.brand_id = b.id
+            WHERE p.category_id = ?
+            ORDER BY b.name ASC
+        `;
+        const [rows] = await db.query(query, [categoryId]);
+        return rows;
+    },
+
     // Thêm thương hiệu mới
     create: async (data) => {
         const { name, status } = data;

@@ -1,31 +1,50 @@
 const jwt = require('jsonwebtoken');
 
+// ────────────────────────────────────────────────────────────
+// Middleware 1: Xác thực Access Token
+// ────────────────────────────────────────────────────────────
 const verifyToken = (req, res, next) => {
-    // 1. Lấy chuỗi Authorization từ Header gửi lên
     const authHeader = req.headers['authorization'];
-    
-    // 2. Token thường có dạng: "Bearer chuoi_token_cua_ban"
-    // Ta dùng split(' ') để lấy phần chuỗi sau chữ 'Bearer'
-    const token = authHeader && authHeader.split(' ')[1];
+    console.log("🔍 [DEBUG] Authorization Header received:", authHeader ? "YES (Bearer ...)" : "NO");
+    const token = authHeader && authHeader.split(' ')[1]; // "Bearer <token>"
 
-    // 3. Nếu không có token, báo lỗi ngay
     if (!token) {
-        return res.status(401).json({ message: "Bạn chưa đăng nhập. Vui lòng gửi kèm Token!" });
+        return res.status(401).json({ message: "Bạn chưa đăng nhập. Vui lòng gửi kèm Access Token!" });
     }
 
     try {
-        // 4. Kiểm tra token có đúng không (Sử dụng Secret Key đã dùng ở authController)
-        const decoded = jwt.verify(token, 'BI_MAT_CUA_BAN');
-        
-        // 5. Nếu đúng, lưu thông tin user vào đối tượng req để các hàm sau sử dụng
-        req.user = decoded;
-        
-        // 6. Cho phép đi tiếp vào Controller
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = decoded; // { id, role, email }
         next();
     } catch (error) {
-        // Nếu token hết hạn hoặc sai lệch
-        return res.status(403).json({ message: "Token không hợp lệ hoặc đã hết hạn!" });
+        console.error("🚨 [AUTH ERROR] Token verification failed:", error.message);
+        if (error.name === 'TokenExpiredError') {
+            return res.status(401).json({ message: "Token đã hết hạn!", error: 'TokenExpiredError' });
+        }
+        return res.status(403).json({ message: `Token không hợp lệ! (${error.message})` });
     }
 };
 
-module.exports = verifyToken;
+// ────────────────────────────────────────────────────────────
+// Middleware 2: Kiểm tra Role (dùng sau verifyToken)
+// Ví dụ dùng: verifyRole(1)         → chỉ Admin
+//             verifyRole(1, 2)       → Admin + Staff
+//             verifyRole(1, 2, 3)    → Tất cả roles
+// ────────────────────────────────────────────────────────────
+const verifyRole = (...allowedRoles) => {
+    return (req, res, next) => {
+        if (!req.user) {
+            return res.status(401).json({ message: "Chưa xác thực!" });
+        }
+
+        if (!allowedRoles.includes(req.user.role)) {
+            return res.status(403).json({
+                message: "Bạn không có quyền thực hiện thao tác này!"
+            });
+        }
+
+        next();
+    };
+};
+
+module.exports = { verifyToken, verifyRole };

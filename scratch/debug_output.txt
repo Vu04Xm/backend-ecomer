@@ -1,0 +1,31 @@
+=== RECENT ORDERS ===
+  #42 | user_id: 30 | total: 38501.00 | status: Pending | method: COD
+  #41 | user_id: 30 | total: 46000.00 | status: Pending | method: COD
+  #40 | user_id: 30 | total: 46000.00 | status: Delivered | method: COD
+  #39 | user_id: 30 | total: 46000.00 | status: Delivered | method: COD
+  #38 | user_id: 30 | total: 11234000.00 | status: Cancelled | method: PAYOS
+
+--- ORDER #42 DETAILS (2 items) ---
+  product_id: 79 | name: May giat say aqua inverter giat 10kg say 7kg aqd ah1051j ps 1 | qty: 1 | price_at_purchase: 8490000.00 | current_price: 23190000.00
+  product_id: 197 | name: 1 | qty: 1 | price_at_purchase: 2000.00 | current_price: 2000.00
+
+--- ORDER #41 DETAILS (2 items) ---
+  product_id: 78 | name: May giat samsung inverter 13kg wa80f13s5bsv 10 | qty: 1 | price_at_purchase: 750000.00 | current_price: 15190000.00
+  product_id: 197 | name: 1 | qty: 1 | price_at_purchase: 2000.00 | current_price: 2000.00
+
+--- ORDER #40 DETAILS (2 items) ---
+  product_id: 79 | name: May giat say aqua inverter giat 10kg say 7kg aqd ah1051j ps 1 | qty: 1 | price_at_purchase: 8490000.00 | current_price: 23190000.00
+  product_id: 197 | name: 1 | qty: 1 | price_at_purchase: 2000.00 | current_price: 2000.00
+
+--- ORDER #39 DETAILS (3 items) ---
+  product_id: 79 | name: May giat say aqua inverter giat 10kg say 7kg aqd ah1051j ps 1 | qty: 1 | price_at_purchase: 8490000.00 | current_price: 23190000.00
+  product_id: 80 | name: May giat toshiba inverter 10kg tw t23bu110uwv mg | qty: 1 | price_at_purchase: 35000000.00 | current_price: 6190000.00
+  product_id: 197 | name: 1 | qty: 1 | price_at_purchase: 2000.00 | current_price: 2000.00
+
+--- ORDER #38 DETAILS (1 items) ---
+  product_id: 190 | name: Xiaomi pad 7 4 | qty: 1 | price_at_purchase: 11190000.00 | current_price: 11190000.00
+
+=== CURRENT CART ITEMS ===
+  cart_id: 56 | user_id: 28 | product_id: 78 | name: May giat samsung inverter 13kg wa80f13s5bsv 10 | qty: 3 | price: 15190000.00
+  cart_id: 62 | user_id: 26 | product_id: 195 | name: Xiaomi redmi pad 2 wifi 1 | qty: 1 | price: 8190000.00
+  cart_id: 65 | user_id: 29 | product_id: 194 | name: Xiaomi redmi pad 2 pro | qty: 1 | price: 15190000.00

@@ -10,6 +10,16 @@ const brandController = {
         }
     },
 
+    getBrandsByCategory: async (req, res) => {
+        try {
+            const { categoryId } = req.params;
+            const brands = await brandModel.getBrandsByCategory(categoryId);
+            res.status(200).json(brands);
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    },
+
     addBrand: async (req, res) => {
         try {
             const result = await brandModel.create(req.body);

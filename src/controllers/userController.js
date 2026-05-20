@@ -57,13 +57,12 @@ const userController = {
             password, 
             phone,
             role_id: 3, 
-            status: 'Active' 
+            status: 'active' 
         });
 
         res.status(201).json({ message: "Đăng ký tài khoản thành công!" });
 
     } catch (error) {
-        console.error("Lỗi Register:", error);
         res.status(500).json({ error: error.message });
     }
 },
